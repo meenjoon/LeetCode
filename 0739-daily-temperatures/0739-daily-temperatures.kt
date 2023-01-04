@@ -1,20 +1,27 @@
 class Solution {
     fun dailyTemperatures(temperatures: IntArray): IntArray {
-        val tempArray = IntArray(temperatures.size) {0}
 
-        for(index in 0 until temperatures.size) {
-            for(index2 in index until temperatures.size) {
+//        val list = MutableList<Int>(temperatures.size,{it->0})
 
-                if(temperatures[index] < temperatures[index2]) {
-                    var goalTemp = index2 - index
-                    tempArray[index] = goalTemp
+        val intArray = IntArray(temperatures.size){0} //
+
+//        list.forEach { print(it) }
+//        println()
+
+        for (index in 0 until temperatures.size) {
+
+            for (index2 in index until temperatures.size) {
+                if (temperatures[index]<temperatures[index2]) {
+                    val length = index2-index
+                    // println("$length")
+                    intArray[index] = length
                     break
                 }
 
             }
         }
-        tempArray.forEach { print(it) }
+//        list.forEach { print(it) }
 
-        return tempArray
+        return intArray
     }
 }
