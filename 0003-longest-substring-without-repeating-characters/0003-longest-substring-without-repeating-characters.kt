@@ -1,55 +1,44 @@
 class Solution {
     fun lengthOfLongestSubstring(s : String) : Int {
 
-        val set = mutableSetOf<Char>()
+        var maxLength = 0
 
-        var start = 0
+        val list = mutableListOf<Char>()
 
-        var lengthlist = mutableListOf<Int>()
+        val countList = mutableListOf<Int>()
 
-        var maxlength = 0
+        var count = 0
 
-        for(end in 0 until s.length) {
-
-//            set.add(s[end])
-            val char = s[end]
-            while (set.contains(char)) {
-                println("start : $start end : $end")
-                set.remove(s[start])
-                start++
-            }
-            println("start : $start end : $end")
-            lengthlist.add(end-start+1)
-
-             set.add(char)
-            println(set)
-
+        if(s.length==1 || s == " ") {
+            return 1
         }
 
-        if(s.isEmpty()) {
+        for(index in 0 until s.length ) {
 
-            maxlength = 0
-        }
-        else if(s == " " || s.length == 1) {
-            maxlength = 1
-        }
+            for(index2 in index until s.length) {
 
-        else {
-            for((index,value) in lengthlist.withIndex()) {
-//                println(value)
-                if (maxlength<= value) {
+                if (!list.contains(s[index2])) {
 
-                    maxlength = value
+                    count++ //같은 문자 포함 안 할때 count 개수 +1
+                    countList.add(count)
 
+                    list.add(s[index2])
+
+                } else {
+                    countList.add(count)
+                    list.clear() // 같은 문자를 포함할 때 list 초기화
+                    count = 0 // 같은 문자를 포함할 때 0으로 초기화
+                    break
                 }
             }
         }
-
-
-
-//        println(maxlength)
-
-
-        return maxlength
+//        countList.forEach { print(it) }
+        for(index in 0 until countList.size) { //모든 인덱스 위치에서의 count들이 들어가 있는 countList의 최댓값 구하기
+            if(maxLength<=countList[index]) {
+                maxLength = countList[index]
+            }
+        }
+    
+        return maxLength
     }
 }
