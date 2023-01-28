@@ -1,28 +1,30 @@
 class Solution {
     fun combine(n: Int, k: Int): List<List<Int>> {
 
-        val ansList = mutableListOf<MutableList<Int>>()
+        val resultList = mutableListOf<MutableList<Int>>()
 
-        val intArrayList = ArrayList<Int>()
+        val numList = ArrayList<Int>()
 
-        fun combidfs(start: Int) {
+        fun dfs(start: Int) {
 
-            if(intArrayList.size == k) {
-                ansList.add(intArrayList.toMutableList())
+            if(numList.size == k) {
+//                println("//넣는 값, ${numList}")
+                resultList.add(numList.toMutableList())
                 return
             }
 
             for(index in start .. n) {
-                intArrayList.add(index)
-                combidfs(index+1)
-                intArrayList.removeAt(intArrayList.size-1)
-
+                numList.add(index)
+//                println("바로 추가, ${numList}")
+                dfs(index+1)
+//                println("빠져나옴, ${numList}")
+                numList.removeAt(numList.size-1)
+//                println("삭제 후, ${numList}")
             }
         }
-        combidfs(1)
 
-        ansList.forEach { print(it) }
+        dfs(1)
 
-        return ansList
+        return resultList
     }
 }
