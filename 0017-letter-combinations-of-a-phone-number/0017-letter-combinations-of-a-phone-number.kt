@@ -1,93 +1,69 @@
 class Solution {
     fun letterCombinations(digits: String): List<String> {
-        val ansList = mutableListOf<String>()
 
-        val map = mutableMapOf<Int, MutableList<Char>>()
+        val result = mutableListOf<String>()
 
-        val charList = mutableListOf<MutableList<Char>>()
+        val map = mutableMapOf<Int,String>()
 
-        val stringBuilder = StringBuilder()
+        val phoneNumber_StringBuilder = StringBuilder()
+        
+        if(digits=="") {
+            return result
+        }
 
         for(index in 2..9) {
-
-            if(index==2 ) {
-                map.put(index , mutableListOf('a'))
-                map[index]?.add('b')
-                map[index]?.add('c')
+            if(index==2) {
+                map.put(index,"abc")
             }
             if(index==3) {
-                map.put(index , mutableListOf('d'))
-                map[index]?.add('e')
-                map[index]?.add('f')
+                map.put(index,"def")
             }
             if(index==4) {
-                map.put(index , mutableListOf('g'))
-                map[index]?.add('h')
-                map[index]?.add('i')
+                map.put(index,"ghi")
             }
             if(index==5) {
-                map.put(index , mutableListOf('j'))
-                map[index]?.add('k')
-                map[index]?.add('l')
+                map.put(index,"jkl")
             }
             if(index==6) {
-                map.put(index , mutableListOf('m'))
-                map[index]?.add('n')
-                map[index]?.add('o')
+                map.put(index,"mno")
             }
             if(index==7) {
-                map.put(index , mutableListOf('p'))
-                map[index]?.add('q')
-                map[index]?.add('r')
-                map[index]?.add('s')
+                map.put(index,"pqrs")
             }
             if(index==8) {
-                map.put(index , mutableListOf('t'))
-                map[index]?.add('u')
-                map[index]?.add('v')
+                map.put(index,"tuv")
             }
             if(index==9) {
-                map.put(index , mutableListOf('w'))
-                map[index]?.add('x')
-                map[index]?.add('y')
-                map[index]?.add('z')
+                map.put(index,"wxyz")
             }
-//            println(map)
-    }
-
-    if(digits == "") {
-        return ansList
-    }
-
-
-    fun phone(start: Int) {
-
-        if(stringBuilder.length==digits.length) {
-
-//            println(stringBuilder.toString())
-
-            ansList.add(stringBuilder.toString())
-
-            return
         }
+    //    println(map)
 
 
-        val inputNumberToString = map[digits[start].toString().toInt()].toString().filter { it.isLetter()}
+        fun dfs(start:Int) {
 
-        for(value in inputNumberToString) {
-            stringBuilder.append(value)
-            phone(start + 1)
-            stringBuilder.deleteCharAt(stringBuilder.length-1)
+            if(phoneNumber_StringBuilder.length == digits.length) {
+    //            println("//추가한 값, ${phoneNumber_StringBuilder.toString()}")
+                result.add(phoneNumber_StringBuilder.toString())
+                return
+            }
+
+            val phoneNumber = map.get(digits[start].toString().toInt())
+
+            for(value in phoneNumber.toString()) {
+                phoneNumber_StringBuilder.append(value)
+    //            println("바로 추가, ${phoneNumber_StringBuilder.toString()}")
+                dfs(start+1)
+    //            println("함수 탈출, ${phoneNumber_StringBuilder.toString()}")
+                phoneNumber_StringBuilder.deleteCharAt(phoneNumber_StringBuilder.length-1)
+    //            println("삭제 한 후, ${phoneNumber_StringBuilder.toString()}")
+            }
+
         }
+    //    result.forEach { print(it) }
 
-    }
+        dfs(0)
 
-    phone(0)
-
-//    ansList.forEach { print(it) }
-
-//    println(map)
-
-        return ansList
+        return result
     }
 }
