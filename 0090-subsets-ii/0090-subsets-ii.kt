@@ -23,6 +23,6 @@ class Solution {
 
 //        resultList.toMutableSet().toList().forEach { println(it) }
 
-        return resultList.toMutableSet().toList()
+        return resultList.toMutableSet().toList() // 중복된 수를 set 컬렉션으로 변경 후 다시 List로 바꾼다.
     }
 }
