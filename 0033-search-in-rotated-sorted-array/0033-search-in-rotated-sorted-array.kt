@@ -1,24 +1,14 @@
 class Solution {
     fun search(nums: IntArray, target: Int): Int {
 
-        val map = mutableMapOf<Int, Int>()
+        var result = -1
 
-        var ans = 0
-
-        for((index,value) in nums.withIndex()) {
-            map.put(value,index)
+        for((index,value) in nums.withIndex()){
+            if(value == target) {
+                result = index
+                return result
+            }
         }
-
-        println(map)
-
-        if(map.containsKey(target)) {
-            ans = map.get(target)!!
-        }
-        else {
-            ans = -1
-        }
-        println(ans)
-
-        return ans
+        return result
     }
 }
