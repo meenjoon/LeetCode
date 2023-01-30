@@ -1,28 +1,31 @@
 class Solution {
     fun subsetsWithDup(nums: IntArray): List<List<Int>> {
-
-        nums.sort()
-        
         val resultList = mutableListOf<MutableList<Int>>()
-
         val numList = ArrayList<Int>()
 
-        fun dfs(start: Int){
+        nums.sort()
 
-//            println(numList)
+        fun dfs(start: Int) {
+
+            if(numList.size == nums.size) {
+                resultList.add(numList.toMutableList())
+                return
+            }
+
             resultList.add(numList.toMutableList())
 
-            for (index in start until nums.size) {
+            for(index in start until nums.size) {
                 numList.add(nums[index])
                 dfs(index+1)
                 numList.removeAt(numList.size-1)
-            }
-        }
 
+            }
+
+        }
         dfs(0)
 
-//        resultList.toMutableSet().toList().forEach { println(it) }
+        // resultList.toMutableSet().forEach { print(it) }
 
-        return resultList.toMutableSet().toList() // 중복된 수를 set 컬렉션으로 변경 후 다시 List로 바꾼다.
+        return resultList.toMutableSet().toList()
     }
 }
