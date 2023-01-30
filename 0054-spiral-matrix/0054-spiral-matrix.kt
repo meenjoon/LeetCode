@@ -31,7 +31,7 @@ class Solution {
                 length_end--
             }
 
-            if(width_start<=width_end) { //왼쪽 
+            if(width_start<=width_end) { //왼쪽 변
                 for(index in length_end downTo length_start) {
                     println("44 $index $width_start")
                     resultList.add(matrix[index][width_start])
