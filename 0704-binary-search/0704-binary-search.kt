@@ -1,10 +1,14 @@
 class Solution {
     fun search(nums: IntArray, target: Int): Int {
-        for (i in 0 until nums.size) {
-            if (nums[i] == target) {
-                return i
+
+        var result = -1
+
+        for((index,value) in nums.withIndex()){
+            if(value == target) {
+                result = index
+                return result
             }
         }
-        return -1
+        return result
     }
 }
